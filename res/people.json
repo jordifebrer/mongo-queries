@@ -1,0 +1,32 @@
+[
+  {
+    "name": "John",
+    "surname": "Smith",
+    "age": 40
+  },
+  {
+    "name": "John",
+    "surname": "Doe",
+    "age": 35
+  },
+  {
+    "name": "Jane",
+    "surname": "Doe",
+    "age": 36
+  },
+  {
+    "name": "Baby",
+    "surname": "Doe",
+    "age": 1
+  },
+  {
+    "name": "Jean",
+    "surname": "Dupont",
+    "age": 55
+  },
+  {
+    "name": "Juan",
+    "surname": "Pérez",
+    "age": 25
+  }
+]
