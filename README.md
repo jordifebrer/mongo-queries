@@ -14,5 +14,6 @@ mongoimport -db testing --collection people res/people.json --jsonArray
 
 Run the script locally:
 ```shell
-mongo localhost:27017/testing CRUD/ex1.json
+mongo localhost:27017/testing CRUD/find.js
+mongo localhost:27017/testing CRUD/delete.js
 ```
