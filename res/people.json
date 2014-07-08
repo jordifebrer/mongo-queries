@@ -2,17 +2,20 @@
   {
     "name": "John",
     "surname": "Smith",
-    "age": 40
+    "age": 40,
+    "hobbies": ["fishing", "running", "slacklining", "yoga"]
   },
   {
     "name": "John",
     "surname": "Doe",
-    "age": 35
+    "age": 35,
+    "hobbies": ["origami", "running", "surfing"]
   },
   {
     "name": "Jane",
     "surname": "Doe",
-    "age": 36
+    "age": 36,
+    "hobbies": ["origami", "running", "yoga"]
   },
   {
     "name": "Baby",
@@ -22,11 +25,13 @@
   {
     "name": "Jean",
     "surname": "Dupont",
-    "age": 55
+    "age": 55,
+    "hobbies": ["fishing", "skating", "slacklining"]
   },
   {
     "name": "Juan",
     "surname": "Pérez",
-    "age": 25
+    "age": 25,
+    "hobbies": ["running", "surfing"]
   }
 ]

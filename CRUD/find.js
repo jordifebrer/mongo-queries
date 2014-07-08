@@ -12,23 +12,44 @@ while(cursor.hasNext()){
     printjson(cursor.next());
 }
 
-// regex: Retrieves documents starting name with 'J'
+// regex: Retrieves documents whose name starts with 'J'
 print("\ndb.people.find({name: {$regex: /^J/}}");
 cursor = db.people.find({name: {$regex: /^J/}});
 while(cursor.hasNext()){
     printjson(cursor.next());
 }
 
-// and: Retrieves documents starting name with 'J' and surname 'S'
+// and: Retrieves documents whose name starts with 'J' and surname 'S'
 print("\ndb.people.find({$and: [{name: {$regex: /^J/}}, {surname: {$regex: /^S/}}]}");
 cursor = db.people.find({$and: [{name: {$regex: /^J/}}, {surname: {$regex: /^S/}}]});
 while(cursor.hasNext()){
     printjson(cursor.next());
 }
 
-// or: Retrieves documents starting name with 'J' or surname 'D'
+// or: Retrieves documents whose name starts with 'J' or surname with 'D'
 print("\ndb.people.find({$or: [{name: {$regex: /^J/}}, {surname: {$regex: /^D/}}]}");
 cursor = db.people.find({$or: [{name: {$regex: /^J/}}, {surname: {$regex: /^D/}}]});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// not: Retrieves documents whose surname not starts with 'D'
+print("\ndb.people.find({surname: {$not: /^D/}}");
+cursor = db.people.find({surname: {$not: /^D/}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// ne: Retrieves documents with surname not equal to 'Doe'
+print("\ndb.people.find({surname: {$ne: 'Doe'}}");
+cursor = db.people.find({surname: {$ne: 'Doe'}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// exists: Retrieves documents without the field hobbies
+print("\ndb.people.find({hobbies: {$exists: false}}");
+cursor = db.people.find({hobbies: {$exists: false}});
 while(cursor.hasNext()){
     printjson(cursor.next());
 }
@@ -36,6 +57,20 @@ while(cursor.hasNext()){
 // in: Retrieves documents with surname in the list ['Smith', 'Dupont']
 print("\ndb.people.find({surname: {'$in': ['Smith', 'Dupont']}})");
 cursor = db.people.find({surname: {'$in': ['Smith', 'Dupont']}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// nin: Retrieves documents with surname not in the list ['Smith', 'Doe']
+print("\ndb.people.find({surname: {'$nin': ['Smith', 'Doe']}})");
+cursor = db.people.find({surname: {'$nin': ['Smith', 'Doe']}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// all: Retrieves documents with all the requested elements of the array
+print("\ndb.people.find({hobbies: {'$all': ['origami', 'running']}})");
+cursor = db.people.find({hobbies: {'$all': ['origami', 'running']}});
 while(cursor.hasNext()){
     printjson(cursor.next());
 }
@@ -68,6 +103,14 @@ while(cursor.hasNext()){
     printjson(cursor.next());
 }
 
+// skip: Retrieves all the documents sorted by surname desc and skipping the
+//  first three results
+print("\ndb.people.find().sort({'surname': -1}).skip(3)");
+cursor = db.people.find().sort({'surname': -1}).skip(3);
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
 // limit: Retrieves one document of the previous sorted by surname desc output
 print("\ndb.people.find().sort({'surname': -1}).limit(1)");
 cursor = db.people.find().sort({'surname': -1}).limit(1);
@@ -84,3 +127,17 @@ print(value);
 print("\ndb.people.find.count()");
 value = db.people.find().count();
 print(value);
+
+// lte: Bad!! Only works the last condition :(
+print("\ndb.people.find({'age': {'$gte': 5}, 'age': {'$lte': 20}}");
+cursor = db.people.find({'age': {'$gte': 5}, 'age': {'$lte': 20}})
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// gte: Solution for the mistake above. Same as $and operator
+print("\ndb.people.find({'age': {'$gte': 5, '$lte': 20}}");
+cursor = db.people.find({'age': {'$gte': 5, '$lte': 20}})
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
