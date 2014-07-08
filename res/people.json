@@ -3,19 +3,30 @@
     "name": "John",
     "surname": "Smith",
     "age": 40,
-    "hobbies": ["fishing", "running", "slacklining", "yoga"]
+    "hobbies": ["fishing", "running", "slacklining", "yoga"],
+    "address": {
+      "name": "home",
+      "street": "742 de Evergreen Terrace",
+      "city": "Springfield",
+      "state": "OR",
+      "zip": 12345
+    },
+    "other": null,
+    "results": [5,6,7]
   },
   {
     "name": "John",
     "surname": "Doe",
     "age": 35,
-    "hobbies": ["origami", "running", "surfing"]
+    "hobbies": ["origami", "running", "surfing"],
+    "results": [8, 9]
   },
   {
     "name": "Jane",
     "surname": "Doe",
     "age": 36,
-    "hobbies": ["origami", "running", "yoga"]
+    "hobbies": ["origami", "running", "yoga"],
+    "results": [7, 10]
   },
   {
     "name": "Baby",

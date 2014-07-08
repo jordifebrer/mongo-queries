@@ -92,7 +92,7 @@ printjson(value);
 
 // findOne: Retrieves one document showing only the name
 // _id: it appears by default, use projection with 0 or false to hide
-print("\ndb.people.findOne({}, {'name': 1, '_id': false}");
+print("\ndb.people.findOne({}, {'name': 1, '_id': 0}");
 value = db.people.findOne({}, {'name': 1, '_id': 0});
 printjson(value);
 
@@ -138,6 +138,51 @@ while(cursor.hasNext()){
 // gte: Solution for the mistake above. Same as $and operator
 print("\ndb.people.find({'age': {'$gte': 5, '$lte': 20}}");
 cursor = db.people.find({'age': {'$gte': 5, '$lte': 20}})
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// find: Retrieves the document with the address.zip: 12345 and displays only
+// the address subdocument
+print("\ndb.people.find({'address.zip': 12345},{'address': 1, '_id': 0}");
+cursor = db.people.find({'address.zip': 12345},{'address': 1, '_id': 0})
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// slice: Retrieves documents with the field hobbies and shows the name and 
+//  the last hobby
+print("\ndb.people.find({hobbies: {$exists: true}},{'_id': 0, 'name': 1, 'hobbies': {$slice: -1}}");
+cursor = db.people.find({hobbies: {$exists: true}},{'_id': 0, 'name': 1, 'hobbies': {$slice: -1}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// null: Querying null values
+print("\ndb.people.find({'other': {'$in': [null], '$exists': true}}");
+cursor = db.people.find({'other': {'$in': [null], '$exists': true}})
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// find: Querying arrays. Retrieves the document with origami as a value
+// in array hobbies
+print("\ndb.people.find({hobbies: 'origami'})");
+cursor = db.people.find({hobbies: 'origami'});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// elemMatch: Retrieves documents with some results between 8 and 10
+print("\ndb.people.find({results: {'$elemMatch': {'$gte' : 8, '$lte' : 10}}}");
+cursor = db.people.find({results: {'$elemMatch': {'$gte' : 8, '$lte' : 10}}});
+while(cursor.hasNext()){
+    printjson(cursor.next());
+}
+
+// size: Retrieves documents with three hobbies
+print("\ndb.people.find({hobbies: {'$size': 3}})");
+cursor = db.people.find({hobbies: {'$size': 3}});
 while(cursor.hasNext()){
     printjson(cursor.next());
 }
