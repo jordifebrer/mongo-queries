@@ -27,3 +27,14 @@ printDocuments('people')
 print("\nb.people.remove()");
 db.people.remove();
 printCounter('people')
+
+
+// Some commands to delete db/collections
+// in mongo shell: Deletes a database
+show dbs
+use target_db
+db.dropDatabase()
+
+// in mongo shell: Deletes a collection
+show collections
+db.target_collection.drop()
