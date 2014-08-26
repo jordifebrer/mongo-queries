@@ -61,3 +61,18 @@ print("\ndb.people.save({_id: 99, age: 35})");
 db.people.save({_id: 99, age: 35});
 printCounter('people')
 printDocuments('people')
+
+
+// Some commands to copy db/collections
+// in bash terminal: Can copy a collection from  different databases
+mongoexport -d origin_db -c origin_collection | mongoimport -d target_db -c target_collection --drop
+
+// in bash terminal: Can copy a collection from  different databases
+mongodump -d origin_db -c origin_collection
+mongorestore -d target_db -c target_collection dump/origin_collection.bson
+
+// in mongo shell: Copies a collection
+db.origin_collection.copyTo('target_collection')
+
+// in mongo shell: Copies a database
+db.copyDatabase('origin_db', 'target_db')
