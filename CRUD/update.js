@@ -78,3 +78,41 @@ print("\ndb.people.update({age: 45},{'$set': {'ok': true}}, false, true)");
 db.people.update({age: 45},{'$set': {'ok': true}}, false, true);
 printCounter('people')
 printDocuments('people')
+
+
+
+// MongoDB - Corner case: Update every element of an array.
+
+// Getting the max array size of my documents.
+var cursor = db.my_doc.aggregate(
+  {
+    $unwind: "$my_array"
+  },
+  {
+    $group: {
+      _id: "$_id",
+      num: {"$sum": 1}
+    }
+  },
+  {
+    $group: {
+      _id: "1",
+      total: {"$max": "$num"}
+    }
+  }
+);
+var MAX_ARRAY_SIZE = cursor.result[0].total;
+
+// Updating every element of the array adding an object in it.
+var obj = {};
+for (var i=0; i < MAX_ARRAY_SIZE; i++) {
+  obj['my_array.' + i + '.my_new_value'] = {"my_param":"qwerty"};
+  db.my_doc.update(
+  {
+    my_array: {$size: (i+1)}
+  }, 
+  {
+    $set: obj
+  }
+  ,false,true)
+}
